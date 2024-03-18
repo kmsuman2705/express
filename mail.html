@@ -1,0 +1,24 @@
+const express = require("express");
+const app = express();
+
+app.use(express.urlencoded({ extended: true }));
+
+function startServer() {
+    console.log("Server started at port 3000...");
+}
+
+function sumanroot(req, res) {
+    res.send("<h1>Welcome to HTML</h1><form action='/signup' method='post'><input type='text' name='username' placeholder='Username'><br><input type='password' name='password' placeholder='Password'><br><button type='submit'>Sign Up</button></form>");
+}
+
+function signup(req, res) {
+    const { username, password } = req.body;
+    // Here you can handle the signup process, e.g., saving to a database
+    console.log("New user signed up - Username: " + username + ", Password: " + password);
+    res.send("<h1>Signup Successful!</h1>");
+}
+
+app.get("/", sumanroot);
+app.post("/signup", signup);
+
+app.listen(3000, startServer);
